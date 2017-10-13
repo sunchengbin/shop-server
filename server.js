@@ -14,11 +14,42 @@
 //   console.log('已启动服务器',"http://127.0.0.1:8081")
 // })
 const Koa = require('koa')
-const app = new Koa()
+const App = new Koa()
+const KoaRouter = require('koa-router')()
+const BodyParser = require('koa-bodyparser')
+import {Login, Signin} from './router/index'
+app.use(BodyParser())
 app.use(async (ctx, next) => {
+  console.log(`Process ${ctx.request.method} ${ctx.request.url}...`)
   await next()
-  ctx.response.type = 'text/html'
-  ctx.response.body = '<h1>Hello, koa2!</h1>'
 })
-app.listen(2000)
+// add url-router
+// KoaRouter.get('/hello/:name', async (ctx, next) => {
+//   let name = ctx.params.name
+//   ctx.response.body = `<h1>hello,${name}</h1>`
+// })
+// KoaRouter.get('/', async (ctx, next) => {
+//   ctx.response.body = `<h1>Index</h1>
+//         <form action="/signin" method="post">
+//             <p>Name: <input name="name" value="koa"></p>
+//             <p>Password: <input name="password" type="password"></p>
+//             <p><input type="submit" value="Submit"></p>
+//         </form>`
+// })
+// KoaRouter.post('/signin', async (ctx, next) => {
+//     let name = ctx.request.body.name || '',
+//         password = ctx.request.body.password || '';
+//     console.log(`signin with name: ${name}, password: ${password}`);
+//     if (name === 'koa' && password === '12345') {
+//         ctx.response.body = `<h1>Welcome, ${name}!</h1>`;
+//     } else {
+//         ctx.response.body = `<h1>Login failed!</h1>
+//         <p><a href="/">Try again</a></p>`;
+//     }
+// });
+KoaRouter.get(Login.url, Login.callback)
+KoaRouter.post(Signin.url, Signin.callback)
+App.use(KoaRouter.routes())
+App.listen(2000)
 console.log('koa server is starting')
+console.log('the link is http://localhost:2000')
