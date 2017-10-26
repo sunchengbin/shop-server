@@ -5,14 +5,20 @@
   "author": "sunchengbin <sunchengbin@weidian.com>",
   "private": true,
   "babel": {
-    "presets": ["env"]
+    "presets": [
+      "env"
+    ]
   },
   "scripts": {
-    "start": "node server.js"
+    "build": "babel server.js -o compiled-server.js",
+    "start": "babel-node server.js"
   },
   "dependencies": {
     "body-parser": "^1.17.2",
+    "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "^1.4.3",
+    "excel-export": "^0.5.1",
+    "iconv-lite": "^0.4.19",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
