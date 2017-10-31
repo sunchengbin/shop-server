@@ -11,6 +11,8 @@
   },
   "scripts": {
     "build": "babel server.js -o compiled-server.js",
+    "crawler": "babel-node ./crawler/zhihu-promise.js",
+    "test": "babel-node ./study/index.js",
     "start": "babel-node server.js"
   },
   "dependencies": {
