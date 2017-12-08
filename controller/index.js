@@ -20,7 +20,14 @@ jsRouterFiles.forEach((f) => {
       case 'POST':
         KoaRouterApp.post(fileParam.url, fileParam.callback)
         break
+      case 'PUT':
+        KoaRouterApp.put(fileParam.url, fileParam.callback)
+        break
+      case 'DELETE':
+        KoaRouterApp.del(fileParam.url, fileParam.callback)
+        break
       default:
+        KoaRouterApp.all(fileParam.url, fileParam.callback)
         break
     }
   }

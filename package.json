@@ -4,15 +4,13 @@
   "description": "the server for shop-production,the server's port is 8081.",
   "author": "sunchengbin <sunchengbin@weidian.com>",
   "private": true,
-  "babel": {
-    "presets": [
-      "env"
-    ]
-  },
   "scripts": {
-    "build": "babel server.js -o compiled-server.js",
     "crawler": "babel-node ./crawler/zhihu-promise.js",
-    "test": "babel-node ./study/index.js",
+    "taobao": "babel-node ./review/taobao.js",
+    "comment": "babel-node ./review/get-comment-by-https.js",
+    "jd-question": "babel-node ./review/jd-question.js",
+    "jinengxie-bbt": "babel-node ./review/jinengxie/babytree.js",
+    "test": "babel-node ./controller/mysql-connect.js",
     "start": "babel-node server.js"
   },
   "dependencies": {
@@ -20,7 +18,6 @@
     "cheerio": "^1.0.0-rc.2",
     "cookie-parser": "^1.4.3",
     "excel-export": "^0.5.1",
-    "iconv-lite": "^0.4.19",
     "koa": "^2.3.0",
     "koa-bodyparser": "^4.2.0",
     "koa-router": "^7.2.1",
@@ -29,8 +26,13 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "express": "^4.14.1"
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "express": "^4.14.1",
+    "iconv-lite": "^0.4.19",
+    "mysql": "^2.15.0",
+    "mysql2": "^1.5.1",
+    "sequelize": "^4.23.1"
   },
   "engines": {
     "node": ">= 4.0.0",
