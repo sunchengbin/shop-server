@@ -1,3 +1,4 @@
+// 栗子：node babytree.js 1 101 ynf 羊奶粉
 const argv = process.argv.splice(2)
 const cheerio = require('cheerio')
 const http = require('http')
