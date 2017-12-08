@@ -114,7 +114,6 @@ function getCommentsUrl (page) {
 }
 async function getComments (page) {
   let commentUrl = getCommentsUrl(page)
-  console.log(commentUrl)
   let comment = await getData(commentUrl)
   comment = JSON.parse(comment.replace('callback(','').replace(');',''))
   return comment
