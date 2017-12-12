@@ -1,4 +1,4 @@
-// 栗子 phantomjs taobao.js 1 20 545436853162
+// 栗子 phantomjs taobao-update-to-database.js 1 3 43957459520
 // https://detail.tmall.hk/hk/item.htm?spm=a220m.1000858.1000725.22.46e3dd76eJ91vC&id=558385670021&areaId=110100&user_id=2549841410&cat_id=2&is_b=1&rn=765564d552da962d8c726db6869ffbae
 // https://detail.tmall.com/item.htm?spm=a230r.1.14.20.616c0232khOPvL&id=43957459520&ns=1&abbucket=3&skuId=3687315811558
 // https://detail.tmall.com/item.htm?id=545436853162&skuId=3455057059484
@@ -48,7 +48,7 @@ setInterval(function(){
                 keyWords.push(txt)
               }
             }
-            var reStr = num > 0 ? '/' + num : '@'
+            var reStr = num > 0 ? '/' + num : ''
             return keyWords.join(',') + reStr
           }
           window.jsonp885 = function(data){
@@ -59,7 +59,23 @@ setInterval(function(){
               for (var i = 0; i < rateList.length; i++) {
                 var content = rateList[i].rateContent
                 if (content.length > 10 && !/但愿/g.test(content) && !/大概/g.test(content) && !/可能/g.test(content) && !/希望/g.test(content) && !/期待/g.test(content)) {
-                  console.log(rateList[i].rateContent + '@oneOne=' + getHadKeyWord('oneOne', content) + '@oneTwo=' + getHadKeyWord('oneTwo', content)+ '@twoOne=' + getHadKeyWord('twoOne', content)+ '@twoTwo=' + getHadKeyWord('twoTwo', content))
+                  $.ajax({
+                    url: 'http://api.zerotoone.com/v1/updateComments',
+                    dataType: 'json',
+                    type: 'post',
+                    data: {
+                      comment: content,
+                      oneOne: getHadKeyWord('oneOne', content),
+                      oneTwo: getHadKeyWord('oneTwo', content),
+                      twoOne: getHadKeyWord('oneTwo', content),
+                      twoTwo: getHadKeyWord('oneTwo', content),
+                      commentId: rateList[i].id,
+                      itemId: Number(rateList[i].sellerId)
+                    },
+                    success: function(res){
+                      console.log(res.data.comment)
+                    }
+                  })
                 }
               }
             }
@@ -69,4 +85,4 @@ setInterval(function(){
       })
     }
   })
-}, 3000)
+}, 2000)
