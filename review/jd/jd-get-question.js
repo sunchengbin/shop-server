@@ -1,4 +1,4 @@
-// 栗子：node jd-question 2491437 ynby
+// 栗子：node jd-get-question 2491437 ynby
 const https = require('https')
 const argv = process.argv.splice(2)
 const cheerio = require('cheerio')
@@ -54,7 +54,7 @@ function exportToExcel (question, config) {
   }
   config.rows = arr
   let result = excelPort.execute(config)
-  let filePath = `${__dirname}/question-${Name}.xlsx`
+  let filePath = `${__dirname}/xlsx/question-${Name}.xlsx`
   fs.writeFile(filePath, result, 'binary',(err) => {
     if(err){
       console.log(err)

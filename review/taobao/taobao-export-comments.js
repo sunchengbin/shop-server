@@ -32,11 +32,11 @@ function exportToExcel (comments, config) {
   config = config || {}
   config.cols = [
      {caption:'原话', type:'string', width:2000},
-     {caption:'contentId', type:'string', width:200},
-     {caption:'关键词1.1', type:'string', width:200},
-     {caption:'关键词1.2', type:'string', width:200},
-     {caption:'关键词2.1', type:'string', width:200},
-     {caption:'关键词2.2', type:'string', width:200}
+     {caption:'contentId', type:'string', width:200}
+     // {caption:'关键词1.1', type:'string', width:200},
+     // {caption:'关键词1.2', type:'string', width:200},
+     // {caption:'关键词2.1', type:'string', width:200},
+     // {caption:'关键词2.2', type:'string', width:200}
   ]
   let arr = []
   let i = 0
@@ -45,10 +45,10 @@ function exportToExcel (comments, config) {
       arr[i] = []
       arr[i].push(comments[u].comment)
       arr[i].push(comments[u].comment_id)
-      arr[i].push(comments[u].one_one)
-      arr[i].push(comments[u].one_two)
-      arr[i].push(comments[u].two_one)
-      arr[i].push(comments[u].two_two)
+      // arr[i].push(comments[u].one_one)
+      // arr[i].push(comments[u].one_two)
+      // arr[i].push(comments[u].two_one)
+      // arr[i].push(comments[u].two_two)
       i++
     }
   } catch (e) {
@@ -75,10 +75,10 @@ async function getComments () {
 let start = async () => {
   let comment = await getComments()
   comment = JSON.parse(comment.replace(/\\/g,''))
-  if (comment.code === 200) {
-    exportToExcel(comment.data)
+  if (comment.status.status_code === 0) {
+    exportToExcel(comment.result)
   } else {
-    console.log(`comment.code:${comment.code}`)
+    console.log(`comment.status.status_code:${comment.status.status_code}`)
   }
 }
 start()
